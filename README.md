@@ -5,7 +5,7 @@
 
  
 <img src="https://raw.githubusercontent.com/GuilhermeGabriel/ReliefVideoAppFrontEnd/master/screenshots/screenshot01.png">
-
+<img src="https://raw.githubusercontent.com/GuilhermeGabriel/ReliefVideoAppFrontEnd/master/screenshots/screenshot02.png">
 
 
 
