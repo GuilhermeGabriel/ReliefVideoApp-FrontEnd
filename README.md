@@ -22,8 +22,3 @@ Open [http://localhost:4200](http://localhost:4200) to view it in the browser.
 ### `npm run build`
 
 To build the production version
-
-### Next To-Do
-
-[ ] Add pagination
-[ ] Valid if is a youtube link
