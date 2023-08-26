@@ -12,10 +12,11 @@ import {
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useStore } from '../providers/store';
+import { getVideoId } from '../Utils/Utils';
 
 export function History() {
   const { data, setData } = useStore();
-
+  
   return (
     <Box sx={{ mt: 2, width: '100%' }}>
       <nav aria-label="secondary mailbox folders">
@@ -71,9 +72,8 @@ export function History() {
                       <img
                         style={{ marginRight: '8px' }}
                         width={90}
-                        src={
-                          `https://img.youtube.com/vi/${video.split('=')[1]}/0.jpg`
-                        } />
+                        src={`https://img.youtube.com/vi/${getVideoId(video)}/default.jpg`}>
+                      </img>
                     </ListItemAvatar>
                     <Box
                       sx={{

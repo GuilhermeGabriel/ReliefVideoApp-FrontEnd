@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Tab, Tabs } from '@mui/material';
+import { Badge, Box, Tab, Tabs } from '@mui/material';
 import { History } from './History';
 import { Bookmarks } from './Bookmarks';
+import { useStore } from '../providers/store';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -33,6 +34,7 @@ function CustomTabPanel(props: TabPanelProps) {
 }
 
 export function CustomTabs() {
+  const { data } = useStore();
   const [valueTab, setValueTab] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -43,8 +45,24 @@ export function CustomTabs() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={valueTab} onChange={handleChange} centered>
-          <Tab label="History" />
-          <Tab label="Bookmarks" />
+          <Tab
+            label={
+              <Badge
+                badgeContent={data.listVideos.length}
+                color="primary">
+                History
+              </Badge>
+            }
+          />
+          <Tab
+            label={
+              <Badge
+                badgeContent={data.bookmarks.length}
+                color="primary">
+                Bookmarks
+              </Badge>
+            }
+          />
         </Tabs>
       </Box>
 

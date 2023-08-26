@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { getVideoId } from '../Utils/Utils';
 
 export function Bookmarks() {
   const { data, setData } = useStore();
@@ -51,9 +52,8 @@ export function Bookmarks() {
                       <img
                         style={{ marginRight: '8px' }}
                         width={90}
-                        src={
-                          `https://img.youtube.com/vi/${video.split('=')[1]}/0.jpg`
-                        }></img>
+                        src={`https://img.youtube.com/vi/${getVideoId(video)}/default.jpg`}
+                      ></img>
                     </ListItemAvatar>
                     <ListItemText
                       primary={video}
