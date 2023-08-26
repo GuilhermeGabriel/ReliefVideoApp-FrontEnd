@@ -8,21 +8,27 @@ import {
   ListItemAvatar,
   ListItemButton,
   ListItemText,
-  Paper
+  Paper,
+  Typography
 } from '@mui/material';
 
-// import DeleteIcon from '@mui/icons-material/Delete';
-//bookmark icon
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export function Bookmarks() {
   const { data, setData } = useStore();
 
   return (
-    <Box sx={{ mt: 2, width: '100%', padding: '8px', bgcolor: 'background.paper' }}>
+    <Box sx={{ mt: 2, width: '100%' }}>
       <nav aria-label="secondary mailbox folders">
-        <Paper style={{ maxHeight: '80vh', overflow: 'auto' }}>
-          <List sx={{ width: '100%' }}>
+        <Box style={{ maxHeight: 'calc(100vh - 100px)', overflowY: 'auto' }}>
+          <List
+            sx={{ width: '100%' }}
+            subheader={data.bookmarks.length === 0 ?
+              <Typography variant="h6" component="div" style={{ textAlign: 'center', margin: 16 }}>No bookmarks</Typography>
+              : null
+            }
+          >
+
             {
               data.bookmarks.map((video, index) => (
                 <ListItem
@@ -59,7 +65,7 @@ export function Bookmarks() {
               ))
             }
           </List>
-        </Paper>
+        </Box>
       </nav>
     </Box>
   )

@@ -8,7 +8,7 @@ export function VideoView() {
 
   return (
     <Box sx={{
-      mt: 2, width: '70%',
+      my: 2, width: '70%',
       aspectRatio: '16 / 9',
     }}>
       <ReactPlayer

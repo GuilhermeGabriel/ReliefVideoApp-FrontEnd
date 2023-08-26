@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import {
   Box,
   IconButton,
@@ -8,7 +6,7 @@ import {
   ListItemAvatar,
   ListItemButton,
   ListItemText,
-  Paper
+  Typography
 } from '@mui/material';
 
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -19,10 +17,16 @@ export function History() {
   const { data, setData } = useStore();
 
   return (
-    <Box sx={{ mt: 2, width: '100%', padding: '8px', bgcolor: 'background.paper' }}>
+    <Box sx={{ mt: 2, width: '100%' }}>
       <nav aria-label="secondary mailbox folders">
-        <Paper style={{ maxHeight: '80vh', overflow: 'auto' }}>
-          <List sx={{ width: '100%' }}>
+        <Box style={{ maxHeight: 'calc(100vh - 100px)', overflowY: 'auto' }}>
+          <List
+            sx={{ width: '100%' }}
+            subheader={data.listVideos.length === 0 ?
+              <Typography variant="h6" component="div" style={{ textAlign: 'center', margin: 16 }}>No history</Typography>
+              : null
+            }
+          >
             {
               data.listVideos.map((video, index) => (
                 <ListItem
@@ -69,7 +73,6 @@ export function History() {
                         width={90}
                         src={
                           `https://img.youtube.com/vi/${video.split('=')[1]}/0.jpg`
-
                         } />
                     </ListItemAvatar>
                     <Box
@@ -80,6 +83,7 @@ export function History() {
                       }}>
                       <ListItemText
                         primary={video}
+                        secondary=''
                         primaryTypographyProps={{ fontSize: '14px' }}
                         sx={{
                           wordBreak: 'break-word',
@@ -92,7 +96,7 @@ export function History() {
               ))
             }
           </List>
-        </Paper>
+        </Box>
       </nav>
     </Box >
   )

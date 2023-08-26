@@ -7,21 +7,21 @@ import { VideoView } from './components/VideoView';
 
 export default function App() {
   return (
-    <Grid container>
+    <Grid container padding={0}>
       <Grid
         xs={12}
-        sm={4}
-        order={{ xs: 2, sm: 1 }}
+        md={4}
+        order={{ xs: 2, md: 1 }}
       >
         <CustomTabs />
       </Grid >
 
       <Grid
-        order={{ xs: 1, sm: 2 }}
+        order={{ xs: 1, md: 2 }}
         xs={12}
-        sm={8}
+        md={8}
         sx={{
-          
+
           display: 'flex',
           mt: 4,
           flexDirection: 'column',
@@ -29,7 +29,7 @@ export default function App() {
         }}>
         <Header />
         <Search />
-        <VideoView/>
+        <VideoView />
       </Grid>
     </Grid >
   );

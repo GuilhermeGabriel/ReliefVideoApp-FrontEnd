@@ -1,8 +1,8 @@
 import React from 'react';
-
 import { Box, Tab, Tabs } from '@mui/material';
 import { History } from './History';
 import { Bookmarks } from './Bookmarks';
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -19,7 +19,7 @@ function CustomTabPanel(props: TabPanelProps) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: '100%'
+        width: '100%',
       }}
       role="tabpanel"
       hidden={value !== index}
@@ -27,9 +27,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`tab-${index}`}
       {...other}
     >
-      {value === index && (
-        children
-      )}
+      {value === index && <div>{children}</div>}
     </Box>
   );
 }
@@ -44,7 +42,7 @@ export function CustomTabs() {
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs onChange={handleChange} centered>
+        <Tabs value={valueTab} onChange={handleChange} centered>
           <Tab label="History" />
           <Tab label="Bookmarks" />
         </Tabs>
@@ -58,5 +56,5 @@ export function CustomTabs() {
         <Bookmarks />
       </CustomTabPanel>
     </Box>
-  )
+  );
 }
