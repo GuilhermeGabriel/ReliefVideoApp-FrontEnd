@@ -10,12 +10,18 @@
 
 In the project directory, you can run:
 
+### `npm install`
+
+To download the node_modules
+
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:4200](http://localhost:4200) to view it in the browser.
 
 ### `npm run build`
+
+To build the production version
 
 ### Next To-Do
 
