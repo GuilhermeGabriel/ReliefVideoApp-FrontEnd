@@ -1,19 +1,23 @@
-# Simple application composed of an input form and a video view
+## Simple application composed of an input form and a video view
 
-This project was bootstrapped with React
+<span><h3>Demo: <a href="https://segurocontrol001.web.app/">ReliefVideoApp</a></h3>
+ 
+<img src="https://raw.githubusercontent.com/GuilhermeGabriel/ReliefVideoAppFrontEnd/master/screenshots/screenshot01.png">
 
-## Available Scripts
+This project was created with React
+
+## How to run
 
 In the project directory, you can run:
 
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:4200](http://localhost:4200) to view it in the browser.
 
 ### `npm run build`
 
-## Next To-Do
+### Next To-Do
 
-[] Add pagination
-[] Valid if is a youtube link
+[ ] Add pagination
+[ ] Valid if is a youtube link
