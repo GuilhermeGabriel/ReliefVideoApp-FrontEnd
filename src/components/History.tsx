@@ -59,8 +59,15 @@ export function History() {
                         onClick={() => {
                           const listVideos = data.listVideos.filter((item) => item !== video);
                           const bookmarks = data.bookmarks.filter((item) => item !== video);
-                          setData({ ...data, listVideos, bookmarks });
-                          localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks }));
+
+                          if (data.actualVideo === video) {
+                            setData({ ...data, listVideos, bookmarks, actualVideo: '' });
+                            localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks, actualVideo: '' }));
+                            return;
+                          } else {
+                            setData({ ...data, listVideos, bookmarks });
+                            localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks }));
+                          }
                         }}
                         edge="end"
                         aria-label="delete">

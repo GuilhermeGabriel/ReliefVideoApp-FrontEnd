@@ -13,6 +13,11 @@ export function Search() {
     const infos = new FormData(event.currentTarget);
     const url = infos.get('email') as string;
 
+    if(url === '') {
+      alert('You must enter a valid URL');
+      return;
+    }
+
     if (data.listVideos.includes(url)) {
       alert('This video is already in the list');
       return;

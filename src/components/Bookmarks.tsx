@@ -50,7 +50,12 @@ export function Bookmarks() {
                     </>
                   }
                 >
-                  <ListItemButton >
+                  <ListItemButton
+                    onClick={() => {
+                      setData({ ...data, actualVideo: video });
+                      localStorage.setItem('data', JSON.stringify({ ...data, actualVideo: video }));
+                    }}
+                  >
                     <ListItemAvatar>
                       <img
                         style={{ marginRight: '8px' }}
