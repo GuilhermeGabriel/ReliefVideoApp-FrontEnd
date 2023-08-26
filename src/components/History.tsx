@@ -16,7 +16,7 @@ import { getVideoId } from '../Utils/Utils';
 
 export function History() {
   const { data, setData } = useStore();
-  
+
   return (
     <Box sx={{ mt: 2, width: '100%' }}>
       <nav aria-label="secondary mailbox folders">
@@ -34,31 +34,37 @@ export function History() {
                   disablePadding key={index}
                   secondaryAction={
                     <>
-                      <IconButton edge="end" aria-label="bookmark">
+                      <IconButton
+                        onClick={
+                          () => {
+                            if (data.bookmarks.includes(video)) {
+                              const bookmarks = data.bookmarks.filter((item) => item !== video);
+                              setData({ ...data, bookmarks });
+                              localStorage.setItem('data', JSON.stringify({ ...data, bookmarks }));
+                            } else {
+                              const newList = [video, ...data.bookmarks];
+                              setData({ ...data, bookmarks: newList });
+                              localStorage.setItem('data', JSON.stringify({ ...data, bookmarks: newList }));
+                            }
+                          }
+                        }
+                        edge="end"
+                        aria-label="bookmark">
                         <BookmarkIcon
                           color={data.bookmarks.includes(video) ? 'primary' : 'inherit'}
-                          onClick={
-                            () => {
-                              if (data.bookmarks.includes(video)) {
-                                const bookmarks = data.bookmarks.filter((item) => item !== video);
-                                setData({ ...data, bookmarks });
-                                localStorage.setItem('data', JSON.stringify({ ...data, bookmarks }));
-                              } else {
-                                const newList = [video, ...data.bookmarks];
-                                setData({ ...data, bookmarks: newList });
-                                localStorage.setItem('data', JSON.stringify({ ...data, bookmarks: newList }));
-                              }
-                            }
-                          } />
+                        />
                       </IconButton>
 
-                      <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon onClick={() => {
+                      <IconButton
+                        onClick={() => {
                           const listVideos = data.listVideos.filter((item) => item !== video);
                           const bookmarks = data.bookmarks.filter((item) => item !== video);
                           setData({ ...data, listVideos, bookmarks });
                           localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks }));
-                        }} />
+                        }}
+                        edge="end"
+                        aria-label="delete">
+                        <DeleteIcon />
                       </IconButton>
                     </>
                   }

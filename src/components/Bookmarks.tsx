@@ -36,13 +36,16 @@ export function Bookmarks() {
                   disablePadding key={index}
                   secondaryAction={
                     <>
-                      <IconButton edge="end" aria-label="delete">
+                      <IconButton
+                        onClick={() => {
+                          const bookmarks = data.bookmarks.filter((item) => item !== video);
+                          setData({ ...data, bookmarks });
+                        }}
+                        edge="end"
+                        aria-label="delete">
                         <BookmarkIcon
                           color='primary'
-                          onClick={() => {
-                            const bookmarks = data.bookmarks.filter((item) => item !== video);
-                            setData({ ...data, bookmarks });
-                          }} />
+                        />
                       </IconButton>
                     </>
                   }
