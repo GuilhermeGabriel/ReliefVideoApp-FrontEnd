@@ -6,8 +6,6 @@
  
 <img src="https://raw.githubusercontent.com/GuilhermeGabriel/ReliefVideoAppFrontEnd/master/screenshots/screenshot01.png">
 
-This project was created with React
-
 ## How to run
 
 In the project directory, you can run:
