@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useStore } from '../providers/store';
 
 import {
   Box,
@@ -11,17 +11,12 @@ import {
   Paper
 } from '@mui/material';
 
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
+//bookmark icon
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export function Bookmarks() {
-  const [listBookmarks, setListBookmarks] = useState<string[]>([]);
-
-  useEffect(() => {
-    const list = localStorage.getItem('bookmarks');
-    if (list) {
-      setListBookmarks(JSON.parse(list));
-    }
-  }, []);
+  const { data, setData } = useStore();
 
   return (
     <Box sx={{ mt: 2, width: '100%', padding: '8px', bgcolor: 'background.paper' }}>
@@ -29,22 +24,22 @@ export function Bookmarks() {
         <Paper style={{ maxHeight: '80vh', overflow: 'auto' }}>
           <List sx={{ width: '100%' }}>
             {
-              listBookmarks.map((video, index) => (
+              data.bookmarks.map((video, index) => (
                 <ListItem
                   disablePadding key={index}
                   secondaryAction={
                     <>
                       <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon onClick={() => {
-                          const newList = listBookmarks.filter((item) => item !== video);
-                          setListBookmarks(newList);
-                          localStorage.setItem('bookmarks', JSON.stringify(newList));
-                        }} />
+                        <BookmarkIcon
+                          color='primary'
+                          onClick={() => {
+                            const bookmarks = data.bookmarks.filter((item) => item !== video);
+                            setData({ ...data, bookmarks });
+                          }} />
                       </IconButton>
                     </>
                   }
                 >
-                  {/* onClick={() => setActualVideo(video)} */}
                   <ListItemButton >
                     <ListItemAvatar>
                       <img

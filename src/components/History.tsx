@@ -25,11 +25,7 @@ export function History() {
           <List sx={{ width: '100%' }}>
             {
               data.listVideos.map((video, index) => (
-                <ListItem onClick={() => {
-
-                  setData({ ...data, actualVideo: video }); 
-
-                }}
+                <ListItem
                   disablePadding key={index}
                   secondaryAction={
                     <>
@@ -39,15 +35,13 @@ export function History() {
                           onClick={
                             () => {
                               if (data.bookmarks.includes(video)) {
-                                const newList = data.bookmarks.filter((item) => item !== video);
-                                setData({ ...data, bookmarks: newList });
-                                localStorage.setItem('bookmarks', JSON.stringify(newList));
+                                const bookmarks = data.bookmarks.filter((item) => item !== video);
+                                setData({ ...data, bookmarks });
+                                localStorage.setItem('data', JSON.stringify({ ...data, bookmarks }));
                               } else {
                                 const newList = [video, ...data.bookmarks];
-                                console.log(newList);
-                                // setListBookmarks(newList);
                                 setData({ ...data, bookmarks: newList });
-                                localStorage.setItem('bookmarks', JSON.stringify(newList));
+                                localStorage.setItem('data', JSON.stringify({ ...data, bookmarks: newList }));
                               }
                             }
                           } />
@@ -55,16 +49,20 @@ export function History() {
 
                       <IconButton edge="end" aria-label="delete">
                         <DeleteIcon onClick={() => {
-                          const newList = data.listVideos.filter((item) => item !== video);
-                          // setListVideos(newList);
-                          setData({ ...data, listVideos: newList });
-                          localStorage.setItem('videoList', JSON.stringify(newList));
+                          const listVideos = data.listVideos.filter((item) => item !== video);
+                          const bookmarks = data.bookmarks.filter((item) => item !== video);
+                          setData({ ...data, listVideos, bookmarks });
+                          localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks }));
                         }} />
                       </IconButton>
                     </>
                   }
                 >
-                  <ListItemButton>
+                  <ListItemButton
+                    onClick={() => {
+                      setData({ ...data, actualVideo: video });
+                      localStorage.setItem('data', JSON.stringify({ ...data, actualVideo: video }));
+                    }}>
                     <ListItemAvatar>
                       <img
                         style={{ marginRight: '8px' }}
@@ -96,6 +94,6 @@ export function History() {
           </List>
         </Paper>
       </nav>
-    </Box>
+    </Box >
   )
 }

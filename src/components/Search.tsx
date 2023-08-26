@@ -13,14 +13,14 @@ export function Search() {
     const infos = new FormData(event.currentTarget);
     const url = infos.get('email') as string;
 
-    const list = localStorage.getItem('videoList');
-    if (list) {
-      const newList = [url, ...JSON.parse(list)];
-      localStorage.setItem('data', JSON.stringify(newList));
-      setData({ ...data, listVideos: newList });
-    } else {
-      localStorage.setItem('videoList', JSON.stringify([url]));
+    if (data.listVideos.includes(url)) {
+      alert('This video is already in the list');
+      return;
     }
+
+    const listVideos = [url, ...data.listVideos];
+    setData({ ...data, listVideos, actualVideo: url });
+    localStorage.setItem('data', JSON.stringify({ ...data, listVideos, actualVideo: url }));
   };
 
   return (

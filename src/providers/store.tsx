@@ -28,8 +28,6 @@ export const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
     const dataStorage = localStorage.getItem('data');
     if (dataStorage) {
       setData(JSON.parse(dataStorage));
-    } else {
-      localStorage.setItem('data', JSON.stringify(data));
     }
   }, []);
 
