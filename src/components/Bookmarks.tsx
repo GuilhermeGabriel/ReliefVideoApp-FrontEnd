@@ -58,7 +58,6 @@ export function Bookmarks() {
                     <ListItemText
                       primary={video}
                       primaryTypographyProps={{ fontSize: '14px' }}
-                      secondary={'Added at: ' + new Date().toLocaleDateString()}
                       sx={{ wordBreak: 'break-word', marginRight: 4 }} />
                   </ListItemButton>
                 </ListItem>
