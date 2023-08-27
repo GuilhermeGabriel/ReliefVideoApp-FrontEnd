@@ -1,4 +1,5 @@
-## Simple application composed of an input form and a video view
+## Relief VideoApp
+### Simple application composed of an input form and a video view
 
 <span><h3>Demo: <a href="https://guilhermegabriel.github.io/ReliefVideoAppFrontEnd/">ReliefVideoApp</a></h3>
 <span><h3>Video Demo: <a href="https://youtu.be/PALe1d5u9Fs">ReliefVideoApp</a></h3>
