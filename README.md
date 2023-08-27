@@ -31,3 +31,5 @@ Technologies used:
 - MaterialUI
 - React Context
 - Axios
+
+Author - [Guilherme Gabriel](https://www.linkedin.com/in/guilhermegabr/)
