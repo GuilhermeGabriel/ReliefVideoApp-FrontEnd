@@ -22,7 +22,7 @@ npm install
 # start 
 npm run start
 
-# generate production mode
+# to generate production mode
 npm run build
 ```
 
