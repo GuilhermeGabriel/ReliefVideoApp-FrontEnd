@@ -1,5 +1,7 @@
+import { useState, useEffect } from 'react';
 import {
   Box,
+  CircularProgress,
   IconButton,
   List,
   ListItem,
@@ -13,9 +15,37 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useStore } from '../providers/store';
 import { getVideoId } from '../Utils/Utils';
+import axios from 'axios';
 
 export function History() {
   const { data, setData } = useStore();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/history')
+      .then((response) => {
+        setData({ ...data, listVideos: response.data });
+        // localStorage.setItem('data', JSON.stringify({ ...data, listVideos: response.data }));
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log(error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
+      });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Box sx={{ my: 10, width: '100%' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
 
   return (
     <Box sx={{ mt: 2, width: '100%' }}>
@@ -37,14 +67,42 @@ export function History() {
                       <IconButton
                         onClick={
                           () => {
+                            // if (data.bookmarks.includes(video)) {
+                            //   const bookmarks = data.bookmarks.filter((item) => item !== video);
+                            //   setData({ ...data, bookmarks });
+                            //   localStorage.setItem('data', JSON.stringify({ ...data, bookmarks }));
+                            // } else {
+                            //   const newList = [video, ...data.bookmarks];
+                            //   setData({ ...data, bookmarks: newList });
+                            //   localStorage.setItem('data', JSON.stringify({ ...data, bookmarks: newList }));
+                            // }
+
                             if (data.bookmarks.includes(video)) {
                               const bookmarks = data.bookmarks.filter((item) => item !== video);
                               setData({ ...data, bookmarks });
-                              localStorage.setItem('data', JSON.stringify({ ...data, bookmarks }));
+                              axios.delete(`http://localhost:8000/bookmark`, {
+                                data: {
+                                  url: video
+                                }
+                              })
+                                .then((response) => {
+                                  console.log(response);
+                                })
+                                .catch((error) => {
+                                  console.log(error);
+                                })
                             } else {
                               const newList = [video, ...data.bookmarks];
                               setData({ ...data, bookmarks: newList });
-                              localStorage.setItem('data', JSON.stringify({ ...data, bookmarks: newList }));
+                              axios.post(`http://localhost:8000/bookmark`, {
+                                url: video
+                              })
+                                .then((response) => {
+                                  console.log(response);
+                                })
+                                .catch((error) => {
+                                  console.log(error);
+                                })
                             }
                           }
                         }
@@ -57,17 +115,33 @@ export function History() {
 
                       <IconButton
                         onClick={() => {
-                          const listVideos = data.listVideos.filter((item) => item !== video);
-                          const bookmarks = data.bookmarks.filter((item) => item !== video);
+                          // const listVideos = data.listVideos.filter((item) => item !== video);
+                          // const bookmarks = data.bookmarks.filter((item) => item !== video);
 
-                          if (data.actualVideo === video) {
-                            setData({ ...data, listVideos, bookmarks, actualVideo: '' });
-                            localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks, actualVideo: '' }));
-                            return;
-                          } else {
-                            setData({ ...data, listVideos, bookmarks });
-                            localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks }));
-                          }
+                          // if (data.actualVideo === video) {
+                          //   setData({ ...data, listVideos, bookmarks, actualVideo: '' });
+                          //   localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks, actualVideo: '' }));
+                          //   return;
+                          // } else {
+                          //   setData({ ...data, listVideos, bookmarks });
+                          //   localStorage.setItem('data', JSON.stringify({ ...data, listVideos, bookmarks }));
+                          // }
+
+                          axios.delete(`http://localhost:8000/history`, {
+                            data: {
+                              url: video
+                            }
+                          })
+                            .then((response) => {
+                              const listVideos = data.listVideos.filter((item) => item !== video);
+                              const bookmarks = data.bookmarks.filter((item) => item !== video);
+                              setData({ ...data, listVideos, bookmarks });
+                              console.log(response);
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            })
+
                         }}
                         edge="end"
                         aria-label="delete">

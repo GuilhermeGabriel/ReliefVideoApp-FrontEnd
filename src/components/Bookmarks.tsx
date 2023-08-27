@@ -2,6 +2,7 @@ import { useStore } from '../providers/store';
 
 import {
   Box,
+  CircularProgress,
   IconButton,
   List,
   ListItem,
@@ -14,9 +15,40 @@ import {
 
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { getVideoId } from '../Utils/Utils';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export function Bookmarks() {
   const { data, setData } = useStore();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/bookmark')
+      .then((response) => {
+        setData({ ...data, bookmarks: response.data });
+        // localStorage.setItem('data', JSON.stringify({ ...data, bookmarks: response.data }));
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
+        console.log(error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
+      });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Box sx={{ my: 10, width: '100%' }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
 
   return (
     <Box sx={{ mt: 2, width: '100%' }}>
@@ -40,6 +72,11 @@ export function Bookmarks() {
                         onClick={() => {
                           const bookmarks = data.bookmarks.filter((item) => item !== video);
                           setData({ ...data, bookmarks });
+                          axios.delete(`http://localhost:8000/bookmark`, {
+                            data: {
+                              url: video
+                            }
+                          });
                         }}
                         edge="end"
                         aria-label="delete">
@@ -53,7 +90,7 @@ export function Bookmarks() {
                   <ListItemButton
                     onClick={() => {
                       setData({ ...data, actualVideo: video });
-                      localStorage.setItem('data', JSON.stringify({ ...data, actualVideo: video }));
+                      // localStorage.setItem('data', JSON.stringify({ ...data, actualVideo: video }));
                     }}
                   >
                     <ListItemAvatar>

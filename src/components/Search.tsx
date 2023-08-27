@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { useStore } from '../providers/store';
+import axios from 'axios';
 
 export function Search() {
   const { data, setData } = useStore();
@@ -25,7 +26,8 @@ export function Search() {
 
     const listVideos = [url, ...data.listVideos];
     setData({ ...data, listVideos, actualVideo: url });
-    localStorage.setItem('data', JSON.stringify({ ...data, listVideos, actualVideo: url }));
+    // localStorage.setItem('data', JSON.stringify({ ...data, listVideos, actualVideo: url }));
+    axios.post('http://localhost:8000/history', { url })
   };
 
   return (
