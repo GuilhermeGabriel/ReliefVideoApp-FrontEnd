@@ -10,6 +10,9 @@ Simple application composed of an input form and a video view.
 ## Installation
 
 ```bash
+# node v18.16.0
+# npm 9.5.1
+
 npm install
 ```
 
@@ -19,6 +22,12 @@ npm install
 # start 
 npm run start
 
-# production mode
+# generate production mode
 npm run build
 ```
+
+Technologies used:
+- ReactJs
+- MaterialUI
+- React Context
+- Axios
