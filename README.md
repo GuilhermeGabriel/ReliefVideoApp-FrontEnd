@@ -16,7 +16,7 @@ npm install
 ## Running the app, open [http://localhost:4200](http://localhost:4200) to view it in the browser.
 
 ```bash
-# start
+# start 
 npm run start
 
 # production mode
